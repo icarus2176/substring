@@ -1,12 +1,16 @@
 def substrings(text, dictionary)
-  dictionary.reduce(Hash.new(0)) do |word, times_appeared|
-    changed_text = text.downcase
-    until changed_text.include?(word.downcase) == false
-      times_appeared++
-      changed_text = changed_text[changed_text.index(word) + word.length]
+  result = Hash.new(0)
+
+  dictionary.each do |word|
+    down_text = text.downcase
+
+    while down_text.include?(word)
+      result[word] += 1
+      down_text.sub!(word, "")
     end
   end
+  result
 end
 
-dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit", "below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
-substrings("below", dictionary)
+dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
+puts substrings("Howdy partner, sit down! How's it going?", dictionary)
