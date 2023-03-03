@@ -1,0 +1,1 @@
+def substring(text, dictionary)
